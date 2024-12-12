@@ -6,11 +6,17 @@
 
 {% block content %}
   <h1>This is Page 1</h1>
-
-  <p>Lorem ipsum sit dolor amet.</p>
-
-  <pre>
-    {{ dump_user_data }}
-  </pre>
-
+	<div>
+	<form action="/answerForumOne" method="POST">
+	<br>
+	<h2>Title</h2>
+	<input type="text" name="ques2">
+	<br>
+	<h2>Body</h2>
+	<input type="text" name="ques1">
+	<br>
+	<button type="submit">POST</button>
+	</form>
+	</div>
+	
 {% endblock %}

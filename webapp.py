@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, session, request, jsonify, render_template, flash
 from markupsafe import Markup
-from flask_apscheduler import APScheduler
-from apscheduler.schedulers.background import BackgroundScheduler
+#from flask_apscheduler import APScheduler
+#from apscheduler.schedulers.background import BackgroundScheduler
 from flask_oauthlib.client import OAuth
 from bson.objectid import ObjectId
 
@@ -38,7 +38,7 @@ url = os.environ["MONGO_CONNECTION_STRING"]
 client = pymongo.MongoClient(url)
 db = client[os.environ["MONGO_DBNAME"]]
 collection = db['posts'] #TODO: put the name of the collection here
-
+forumsposts = db['forums']
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
@@ -60,7 +60,7 @@ def home():
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():   
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='http')) #callback URL must match the pre-configured callback URL
 
 @app.route('/logout')
 def logout():
@@ -97,7 +97,16 @@ def renderPage1():
 @app.route('/page2')
 def renderPage2():
     return render_template('page2.html')
+@app.route('/answerForumOne',methods=['GET','POST'])
+def renderForumOneAnswers():
+    #if "user_data" in session:
+    forumPost=request.form['ques1']
+    forumTitle=request.form['ques2']
 
+    doc = {"username":session['user_data']['login'], "name":forumTitle,"text":forumPost}
+ 
+    forumsposts.insert_one(doc)
+    return render_template('page1.html')
 #the tokengetter is automatically called to check who is logged in.
 @github.tokengetter
 def get_github_oauth_token():
