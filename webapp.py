@@ -4,6 +4,7 @@ from markupsafe import Markup
 #from apscheduler.schedulers.background import BackgroundScheduler
 from flask_oauthlib.client import OAuth
 from bson.objectid import ObjectId
+from pymongo import DESCENDING
 
 import pprint
 import os
@@ -88,12 +89,8 @@ def authorized():
 
 @app.route('/page1')
 def renderPage1():
-    if 'user_data' in session:
-        user_data_pprint = pprint.pformat(session['user_data'])#format the user data nicely
-    else:
-        user_data_pprint = '';
-    return render_template('page1.html',dump_user_data=user_data_pprint)
-
+    postPostPost=renderTheForum()
+    return render_template('page1.html', postPostPost=postPostPost)
 @app.route('/page2')
 def renderPage2():
     return render_template('page2.html')
@@ -102,12 +99,19 @@ def renderForumOneAnswers():
     #if "user_data" in session:
     forumPost=request.form['ques1']
     forumTitle=request.form['ques2']
-
+    postPostPost=renderTheForum()
     doc = {"username":session['user_data']['login'], "name":forumTitle,"text":forumPost}
  
     forumsposts.insert_one(doc)
-    return render_template('page1.html')
+    return render_template('page1.html', postPostPost=postPostPost)
 #the tokengetter is automatically called to check who is logged in.
+def renderTheForum():
+    option = []
+    for s in forumsposts.find().sort('_id', DESCENDING):
+        formatted_post = f"<h1>{s['username']}-{s['name']}</h1><br><h2>{s['text']}</h2><br>"
+        option.append(formatted_post)
+
+    return Markup("".join(option))   
 @github.tokengetter
 def get_github_oauth_token():
     return session['github_token']
