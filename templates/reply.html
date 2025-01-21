@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% set active_page = "page1" %}
+
+{% block title %}page1{% endblock %}
+
+{% block content %}
+  <h1>Replying to {{mainmessage}}</h1>
+	<div>
+	<form action="/replyIt" method="POST">
+	<input class ="rita" type="text" name="ques1">
+	<br>
+	<button class ="rita" type="submit">Reply</button>
+	</form>
+	</div>
+	<br>
+{% endblock %}

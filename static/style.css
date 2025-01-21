@@ -5,3 +5,22 @@ body {
 #content {
      margin-left: 20px;
 }
+h2{
+  border: 8px solid black;
+  margin: auto;  
+  padding: 20px;
+  text-align: center;
+}
+pre {
+  border: 8px solid black;
+  margin: auto;  
+  padding: 20px;
+  text-align: center;
+}
+#rita {
+  text-align: center;
+
+}
+a{
+  font-size: 30px;
+}

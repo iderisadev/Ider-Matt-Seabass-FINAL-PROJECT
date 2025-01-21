@@ -6,8 +6,25 @@
 
 {% block content %}
 
-  <h1>This is Page 2</h1>
 
-  <p>Lorem ipsum</p>
-
+<h1>Your Story is: {{titleStory}}</h1>
+<br>
+	<div class ="row">
+		
+		<div class="col-lg-3">
+			<h2>Main Character: {{mainc}}</h2>
+			<br>
+			<h2>Main adversary: {{enemy}}</h2>
+			
+		</div>
+		<div class="col-lg-8">
+			<h2>World Details: {{world}}</h2>			
+		
+		</div>
+	</div>
+<br>
+<h2>Summary: {{summary}}</h2>
+<a href="/edit">Edit Your Story</a>
+<br>
+<a href="/makeIt">Make Your First Story</a>
 {% endblock %}

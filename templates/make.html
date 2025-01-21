@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Message{% endblock %}
+
+{% block content %}
+<form action="/makeIt" method="POST">
+	
+	<h3>Make A Title</h3>
+	<input class ="rita" type="text" name="ques231">
+	<br>
+	<h3>Make A Summary</h3>
+	<input class ="rita" type="text" name="ques232">
+	<br>
+	<h3>Make A World</h3>	
+	<input class ="rita" type="text" name="ques233">
+	<br>
+	<h3>Make A Main Character</h3>	
+	<input class ="rita" type="text" name="ques234">
+	<br>
+	<h3>Make An Enemy</h3>
+	<input class ="rita" type="text" name="ques235">
+	<br>
+	<button class ="rita" type="submit">POST</button>
+	
+</form> 
+
+{% endblock %}

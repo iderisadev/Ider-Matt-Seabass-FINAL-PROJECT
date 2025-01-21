@@ -9,14 +9,16 @@
 	<div>
 	<form action="/answerForumOne" method="POST">
 	<br>
-	<h2>Title</h2>
-	<input type="text" name="ques2">
+	<h3>Title or Replying to: </h3>
+	<input class ="rita" type="text" name="ques2">
 	<br>
-	<h2>Body</h2>
-	<input type="text" name="ques1">
+	<h3>Body</h3>
+	<input class ="rita" type="text" name="ques1">
 	<br>
-	<button type="submit">POST</button>
+	<button class ="rita" type="submit">POST</button>
+	<br>
 	</form>
 	</div>
-	<pre>{{postPostPost}}</pre>
+	<br>
+	{{postPostPost}}
 {% endblock %}

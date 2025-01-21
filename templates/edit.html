@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}Message{% endblock %}
+
+{% block content %}
+<form action="/changeIt" method="POST">
+	
+	<h3>Edit Your Story</h3>
+	<input class ="rita" type="text" name="ques23">
+	<br>
+	
+	<select name="choices">
+	  <option>summary</option>
+	  <option>titleStory</option>
+	  <option>world</option>
+	  <option>maincharacter</option>
+	  <option>enemy</option>
+	</select>
+	<br>
+	<button class ="rita" type="submit">POST</button>
+	</form> 
+
+{% endblock %}
