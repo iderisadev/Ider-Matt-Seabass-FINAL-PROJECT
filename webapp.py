@@ -200,7 +200,7 @@ def changeSummary():
 def renderthebrowse():
     option = []
     for s in storyRepo.find().sort('_id', DESCENDING):
-        formatted_post = f"<pre id='imagetoggler'><h3>{s['username']}-{s['title']}</h3><div><br><h3>Summary:{s['summary']}</h3><br><h3>World:{s['world']}</h3><br><h3>Main Character: {s['maincharacter']}</h3></pre><br><button id='btn'>show more</button></div>"
+        formatted_post = f"<pre id='imagetoggler'><h3>{s['username']}-{s['title']}</h3><div><br><h3>Summary:{s['summary']}</h3><br><h3>World:{s['world']}</h3><br><h3>Main Character: {s['maincharacter']}</h3></pre><br></div>"
         option.append(formatted_post)
 
     return Markup("".join(option))           

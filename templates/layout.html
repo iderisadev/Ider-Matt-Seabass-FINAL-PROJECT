@@ -23,12 +23,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="script" href="{{ url_for('static', filename='myscript.js') }}">
+	
+	  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+	/>
+	
     <title>{% block title %}{% endblock %} - My Webpage</title>
 
 
   </head>
   <body>
+	
     {% include 'navbar.html' %}
+	     
 
     <div id="content">
       {% block content %}{% endblock %}

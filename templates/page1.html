@@ -5,20 +5,30 @@
 {% block title %}page1{% endblock %}
 
 {% block content %}
-  <h1>This is Page 1</h1>
-	<div>
-	<form action="/answerForumOne" method="POST">
-	<br>
-	<h3>Title or Replying to: </h3>
-	<input class ="rita" type="text" name="ques2">
-	<br>
-	<h3>Body</h3>
-	<input class ="rita" type="text" name="ques1">
-	<br>
-	<button class ="rita" type="submit">POST</button>
-	<br>
-	</form>
+<div class="container mt-5 p-5">
+	<div class="animate__animated animate__backInDown">
+		<form action="/answerForumOne" method="POST">
+		<div class="row p-5">
+			<div class="col">
+				<h3>Title</h3>
+				<input class ="rita" type="text" name="ques2">
+				<br>
+				<h3>Body</h3>
+				<input class ="rita" type="text" name="ques1">
+				<br>
+				<button class ="rita btn btn-primary p-3" type="submit">POST</button>
+				<br>
+				</form>
+			</div>
+		</div>
+		<div class="row p-5">
+			<div class="col">
+				<div class="animate__animated animate__backInUp">
+				{{postPostPost}}
+				</div>
+			</div>
+		</div>
+		
 	</div>
-	<br>
-	{{postPostPost}}
+</div>
 {% endblock %}
