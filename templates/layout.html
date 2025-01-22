@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<script>
-	function showReplyForm(messageId) {
-		var form = document.getElementById('replyForm_' + messageId);
-		form.style.display = form.style.display === 'none' ? 'block' : 'none';
-	}
-	</script>
+	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,9 +18,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- Popper JS -->
+	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="script" href="{{ url_for('static', filename='myscript.js') }}">
     <title>{% block title %}{% endblock %} - My Webpage</title>
 
 

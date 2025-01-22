@@ -99,34 +99,48 @@ def renderPage1():
     return render_template('page1.html', postPostPost=postPostPost)
 @app.route('/page2')
 def renderPage2():
-    for s in storyRepo.find():
-        if s['username']==session['user_data']['login']:
-            titleStory=returnTitle()
-            summary=returnSummary()
-            mainc=returnMaincharacter()
-            world=returnWorld()
-            enemy=returnEnemy()
+    if "user_data" in session:
+        user_login = session['user_data']['login']
+        user_story = None
+
+        for s in storyRepo.find():
+            if s['username'] == user_login:
+                user_story = s
+                break
+        #this 4 line 4 function was made using ai because there was an error with the loops because the loop made it so that it would just returned
+        if user_story:
+            titleStory = returnTitle()
+            summary = returnSummary()
+            mainc = returnMaincharacter()
+            world = returnWorld()
+            enemy = returnEnemy()
+            return render_template('page2.html', titleStory=titleStory, summary=summary, mainc=mainc, world=world, enemy=enemy)
         else:
-            titleStory="No Title Yet"
-            summary="No Summary Yet"
-            mainc="No Main Character Yet"
-            world="No World Yet"
-            enemy="No Enemy Yet"
-    return render_template('page2.html', titleStory=titleStory, summary=summary,mainc=mainc, world=world, enemy=enemy)
-    
+            return render_template('makeIt.html')
+    else:
+        return render_template('message.html', message=" You gotta Log in first")
 @app.route('/answerForumOne',methods=['GET','POST'])
 def renderForumOneAnswers():
     #if "user_data" in session:
-    forumPost=request.form['ques1']
-    forumTitle=request.form['ques2']
-    doc = {"username":session['user_data']['login'], "name":forumTitle,"text":forumPost}
-    
-    forumsposts.insert_one(doc)
-    postPostPost=renderTheForum()
-
+    if "user_data" in session:
+        forumPost=request.form['ques1']
+        forumTitle=request.form['ques2']
+        doc = {"username":session['user_data']['login'], "name":forumTitle,"text":forumPost}
+        
+        forumsposts.insert_one(doc)
+        postPostPost=renderTheForum()
+    else:
+        return render_template("message.html", message="log in first before")
     return render_template('page1.html', postPostPost=postPostPost)
+@app.route('/browse')
+def renderBrowser():
+        posts=renderthebrowse()
+        return render_template('browse.html',posts=posts)
 @app.route('/makeIt', methods=['GET', 'POST'])
 def makeStory():
+    for s in storyRepo.find():
+        if s['username']==session['user_data']['login']:
+            return render_template('message.html', message="You already have a story")
     if request.method == 'GET':
         return render_template('make.html')
     
@@ -183,7 +197,13 @@ def changeSummary():
     return render_template('edit.html')
 #got help from perplexity because its confusing    
 
-    
+def renderthebrowse():
+    option = []
+    for s in storyRepo.find().sort('_id', DESCENDING):
+        formatted_post = f"<pre id='imagetoggler'><h3>{s['username']}-{s['title']}</h3><div><br><h3>Summary:{s['summary']}</h3><br><h3>World:{s['world']}</h3><br><h3>Main Character: {s['maincharacter']}</h3></pre><br><button id='btn'>show more</button></div>"
+        option.append(formatted_post)
+
+    return Markup("".join(option))           
 #the tokengetter is automatically called to check who is logged in.
 def renderTheForum():
     option = []

@@ -11,6 +11,9 @@
         <li class="nav-item">
 	  		<a {% if active_page == "page2" %} class="nav-link active"{% else %}class="nav-link"{% endif %} href="/page2">Your Story</a>
         </li>
+		<li class="nav-item">
+	  		<a {% if active_page == "Browse" %} class="nav-link active"{% else %}class="nav-link"{% endif %} href="/browse">Browse</a>
+        </li>
       </ul>
       <ul class="navbar-nav">
     	{% if logged_in %}
